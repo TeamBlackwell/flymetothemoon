@@ -1,6 +1,6 @@
-# Learning Local Wind Fields through Range Sensing LT :zap: :helicopter:
+# Learning Local Wind Fields LT :zap: :helicopter:
 
-Deep Learning project to predict local wind fields in urban landscapes.
+Deep Learning project to predict local wind fields in urban landscapes through range sensing.
 
 This project aims to predict the local windflow around a drone in an urban environment through range sensing.
 The model does not use the entire map knowledge but rather LiDAR data to understand the structures present around it.
