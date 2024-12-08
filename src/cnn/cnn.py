@@ -28,8 +28,8 @@ class ConvEncoder(torch.nn.Module):
             in_channels=32, out_channels=64, kernel_size=3, padding=1
         )  # (N, 64, 90)
         self.pool_conv_3 = nn.Conv1d(
-            in_channels=64, out_channels=64, kernel_size=5, padding=1, stride=3
-        )  # (N, 64, 30)
+            in_channels=64, out_channels=64, kernel_size=3, padding=1, stride=2
+        )  # (N, 64, 45)
 
     def forward(self, x):
         x = x.unsqueeze(1)
@@ -53,14 +53,16 @@ class MLPDecoder(torch.nn.Module):
 
         # in: (N, 64, 30)
         self.flatten = nn.Flatten()  # (N, 1920)
-        self.input_layer = nn.Linear(in_features=1920, out_features=512)  # (N, 512)
-        self.hidden_layer_1 = nn.Linear(512, 256)  # (N, 256)
-        self.hidden_layer_2 = nn.Linear(256, (pred_size**2) * 2)  # (N, 2*S^2)
+        self.input_layer = nn.Linear(in_features=2880, out_features=1024)  # (N, 512)
+        self.hidden_layer_1 = nn.Linear(1024, 512)  # (N, 256)
+        self.hidden_layer_2 = nn.Linear(512, 256)  # (N, 256)
+        self.hidden_layer_3 = nn.Linear(256, (pred_size**2) * 2)  # (N, 2*S^2)
 
     def forward(self, x):
         x = self.input_layer(self.flatten(x))
         x = self.hidden_layer_1(x)
         x = self.hidden_layer_2(x)
+        x = self.hidden_layer_3(x)
         
         return x.view(x.size(0), self.pred_size, self.pred_size, 2)
 
