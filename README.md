@@ -18,7 +18,7 @@ pip install -r requirements.txt
 To train the model, run the following command.
 
 ```bash
-python src/main.py fit --model WindFlowDecoder --data UrbanWinds2DDataModule --data.data_dir data
+python src/main.py fit --model WindFlowDecoder  --data UrbanWinds2DDataModule --data.data_dir 'data' --trainer.logger TensorBoardLogger --trainer.logger.save_dir './logs/windflowdecoder_logs' --trainer.check_val_every_n_epoch 100 --trainer.max_epochs 1000
 ```
 
 ## Data
