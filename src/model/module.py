@@ -27,6 +27,9 @@ class WindFlowDecoder(LightningModule):
         input_data = torch.cat([wind_vector,lidar_scan], dim=1)
         prediction = self.decoder(input_data)
         loss = self.mse_criterion(prediction, prediction_gt)
+        acc = self.metric(prediction, prediction_gt)
+        self.log('train_loss', loss, on_step=True, on_epoch=False, prog_bar=True)
+        self.log('train_accuracy', acc, on_step=True, on_epoch=False, prog_bar=True)
         return loss
 
     def configure_optimizers(self):
