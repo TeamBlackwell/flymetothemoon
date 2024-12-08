@@ -28,7 +28,7 @@ The code for data generation can be found [here](https://github.com/TeamBlackwel
 
 The data folder file structure is mentioned below.
 
-```
+```txt
 data/
 ├─ cityscapes/
 │  ├─ city_0.csv
