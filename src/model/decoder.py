@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 
+
 class MLPDecoder(nn.Module):
 
     def __init__(self, input_size, hidden_size, prediction_window_size):
@@ -10,12 +11,11 @@ class MLPDecoder(nn.Module):
         self.fc2 = nn.Linear(hidden_size, hidden_size * 2)
         self.fc2 = nn.Linear(hidden_size, hidden_size * 3)
         self.fc2 = nn.Linear(hidden_size, hidden_size * 4)
-        self.fc3 = nn.Linear(hidden_size * 4, (self.pred_size**2)*2)
+        self.fc3 = nn.Linear(hidden_size * 4, (self.pred_size**2) * 2)
 
     def forward(self, x):
         x = torch.relu(self.fc1(x))
         x = torch.relu(self.fc2(x))
         x = self.fc3(x)
         # reshape to prediction window size
-        return x.view(1, self.pred_size, self.pred_size, 2)
-    
+        return x.view(x.size(0), self.pred_size, self.pred_size, 2)
