@@ -7,6 +7,20 @@ The model does not use the entire map knowledge but rather LiDAR data to underst
 
 The lightweight nature of the model allows it to efficiently run on mobile and power constrained environments such as a drone.
 
+## Usage
+
+Install the required packages using the following command.
+
+```bash
+pip install -r requirements.txt
+```
+
+To train the model, run the following command.
+
+```bash
+python src/main.py fit --model WindFlowDecoder --data UrbanWinds2DDataModule --data.data_dir data
+```
+
 ## Data
 
 The 2D data for the urban cityscapes, windflows and LiDAR data have been generated synthetically.

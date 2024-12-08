@@ -12,7 +12,6 @@ class WindFlowDecoder(LightningModule):
         self,
         prediction_size=10,
         learning_rate=0.0002,
-        lambda_mse=200,
     ):
 
         super().__init__()
