@@ -2,3 +2,4 @@ torch
 lightning
 tensorboard
 pandas
+jsonargparse[signatures]>=4.27.7
