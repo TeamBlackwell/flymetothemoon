@@ -18,4 +18,4 @@ class MLPDecoder(nn.Module):
         x = torch.relu(self.fc2(x))
         x = self.fc3(x)
         # reshape to prediction window size
-        return x.view(1, self.pred_size, self.pred_size, 2)
+        return x.view(x.size(0), self.pred_size, self.pred_size, 2)
