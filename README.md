@@ -21,6 +21,12 @@ To train the model, run the following command.
 python src/main.py fit --model WindFlowDecoder  --data UrbanWinds2DDataModule --data.data_dir 'data' --trainer.logger TensorBoardLogger --trainer.logger.save_dir './logs/windflowdecoder_logs' --trainer.check_val_every_n_epoch 100 --trainer.max_epochs 1000 --trainer.log_every_n_steps 5
 ```
 
+To view tensorboard logs, run the following command.Ensure that the logdir is the same as the one used in the training command.
+
+```bash
+tensorboard --logdir logs/windflowdecoder_logs
+```
+
 ## Data
 
 The 2D data for the urban cityscapes, windflows and LiDAR data have been generated synthetically.
