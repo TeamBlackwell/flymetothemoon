@@ -97,7 +97,7 @@ class UrbanWinds2DDataModule(L.LightningDataModule):
 
 class UrbanWinds2DLidarDataModule(L.LightningDataModule):
     def __init__(
-        self, data_dir: Path, batch_size: int = 4, prediction_window_size: int = 10
+        self, data_dir: Path, batch_size: int = 4, prediction_window_size: int = 11
     ):
         super().__init__()
         self.data_dir = data_dir
@@ -117,19 +117,19 @@ class UrbanWinds2DLidarDataModule(L.LightningDataModule):
     def train_dataloader(self):
         return DataLoader(
             self.urbanflows_train,
-            batch_size=60,
+            batch_size=1024,
             shuffle=True,
-            num_workers=4,
+            num_workers=6,
             persistent_workers=True,
         )
 
     def val_dataloader(self):
         return DataLoader(
             self.urbanflows_val,
-            batch_size=6,
+            batch_size=512,
             shuffle=False,
-            num_workers=4,
-        persistent_workers=True,
+            num_workers=6,
+            persistent_workers=True,
         )
 
 
@@ -155,7 +155,7 @@ class UrbanWinds2DGraphModule(L.LightningDataModule):
     def train_dataloader(self):
         return DataLoader(
             self.urbanflows_train,
-            batch_size=1,
+            batch_size=60,
             shuffle=True,
             num_workers=0,
         )
@@ -163,7 +163,7 @@ class UrbanWinds2DGraphModule(L.LightningDataModule):
     def val_dataloader(self):
         return DataLoader(
             self.urbanflows_val,
-            batch_size=1,
+            batch_size=6,
             shuffle=False,
             num_workers=0,
         )
@@ -192,13 +192,18 @@ class UrbanWind2DLidar(Dataset):
         lidar_data = np.load(self.lidar_dir / f"city_{city_id}_pos{lidar_scan_id}.npy")
 
         # extract the ground truth
-        l = x - self.window_offset_from_center
+        l = x - self.window_offset_from_center - 1
         r = x + self.window_offset_from_center
-        t = y - self.window_offset_from_center
+        t = y - self.window_offset_from_center - 1
         b = y + self.window_offset_from_center
 
-        prediction_window_gt = windflow_data[l:r, t:b, :]
+        # if somehow the window is out of bounds, pad with zeros
+        if l < 0 or r >= windflow_data.shape[0] or t < 0 or b >= windflow_data.shape[1]:
+            prediction_window_gt = np.zeros((self.window_offset_from_center * 2 + 1, self.window_offset_from_center * 2 + 1, 2))
+        else:
+            prediction_window_gt = windflow_data[l:r, t:b, :]
 
+    
         # extract the input data
         w_x, w_y = windflow_data[x, y, :]
 
@@ -213,7 +218,8 @@ class UrbanWind2DLidar(Dataset):
             lidar_data = polar_to_cartesian(lidar_data, grid_size=75)
             self.lidar_memo[lidar_scan_id] = lidar_data
         wind_vector = torch.tensor([w_x, w_y])
-
+        
+        # print(prediction_window_gt.shape, wind_vector.shape, lidar_data.shape)
         return prediction_window_gt, wind_vector, lidar_data
 
 

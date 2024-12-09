@@ -59,7 +59,7 @@ class BinarizedCNN2D(LightningModule):
 
     def __init__(
         self,
-        prediction_size=10,
+        prediction_size=11,
         learning_rate=0.0002,
     ):
 
