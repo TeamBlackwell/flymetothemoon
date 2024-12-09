@@ -173,6 +173,7 @@ class UrbanWind2DLidar(Dataset):
         self.lidar_dir = path / "lidar"
         self.position_df = pd.read_csv(path / "lidar_positions.csv")
         self.window_offset_from_center = prediction_window_size // 2
+        self.lidar_memo = {}
 
     def __len__(self):
         return len(self.position_df)
@@ -204,7 +205,11 @@ class UrbanWind2DLidar(Dataset):
         w_x = torch.tensor(w_x).float()
         w_y = torch.tensor(w_y).float()
         lidar_data = torch.tensor(lidar_data).float()
-        lidar_data = polar_to_cartesian(lidar_data, grid_size=75)
+        if lidar_scan_id in self.lidar_memo:
+            lidar_data = self.lidar_memo[lidar_scan_id]
+        else:
+            lidar_data = polar_to_cartesian(lidar_data, grid_size=75)
+            self.lidar_memo[lidar_scan_id] = lidar_data
         wind_vector = torch.tensor([w_x, w_y])
 
         return prediction_window_gt, wind_vector, lidar_data
