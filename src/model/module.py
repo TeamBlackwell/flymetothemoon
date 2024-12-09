@@ -15,7 +15,7 @@ class WindFlowDecoder(LightningModule):
 
     def __init__(
         self,
-        prediction_size=10,
+        prediction_size=11,
         learning_rate=1e-3,
     ):
 
@@ -101,7 +101,7 @@ class WindFlowDecoderAdvanced(LightningModule):
 
     def __init__(
         self,
-        prediction_size=10,
+        prediction_size=11,
         learning_rate=1e-2,
     ):
 

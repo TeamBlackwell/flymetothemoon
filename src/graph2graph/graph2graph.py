@@ -89,7 +89,7 @@ class LidarGraphConverter:
 
 
 class G2GCore(torch.nn.Module):
-    def __init__(self, node_feature_dim=2, hidden_dim=64, pred_size=10):
+    def __init__(self, node_feature_dim=2, hidden_dim=64, pred_size=11):
         super(G2GCore, self).__init__()
         # Define GCN layers
         self.pred_size = pred_size

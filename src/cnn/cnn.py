@@ -101,7 +101,7 @@ class MLPDecoder(torch.nn.Module):
 
 
 class ConvModel(torch.nn.Module):
-    def __init__(self, pred_size=10):
+    def __init__(self, pred_size=11):
         super(ConvModel, self).__init__()
         self.encoder = ConvEncoder()
         self.decoder = MLPDecoder(pred_size=pred_size)
