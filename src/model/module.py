@@ -68,16 +68,16 @@ class BinarizedCNN2D(LightningModule):
         self.model = CNN_2D(
             input_size=362,
             kernel_size=3,
-            hidden_size_lidar=256,
-            hidden_size_wind=64,
+            hidden_size_lidar=128,
+            hidden_size_wind=32,
             prediction_window_size=prediction_size,
         )
         self.mse_criterion = nn.MSELoss()
 
     def training_step(self, batch, batch_idx):
         prediction_gt, wind_vector, lidar_scan = batch
-        input_data = torch.cat([wind_vector, lidar_scan], dim=1)
-        prediction = self.model(input_data)
+        # input_data = torch.cat([wind_vector, lidar_scan], dim=1)
+        prediction = self.model(lidar_scan, wind_vector)
         loss = self.mse_criterion(prediction, prediction_gt)
         compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=False)
         return loss
@@ -87,8 +87,8 @@ class BinarizedCNN2D(LightningModule):
         Calculates metrics for validation step
         """
         prediction_gt, wind_vector, lidar_scan = batch
-        input_data = torch.cat([wind_vector, lidar_scan], dim=1)
-        prediction = self.model(input_data)
+        # input_data = torch.cat([wind_vector, lidar_scan], dim=1)
+        prediction = self.model(lidar_scan, wind_vector)
         loss = self.mse_criterion(prediction, prediction_gt)
         compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=True)
 
