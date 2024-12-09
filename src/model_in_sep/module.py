@@ -26,7 +26,7 @@ class WindFlowDecoderButWithSep(LightningModule):
         prediction = self.decoder(input_data)
         loss = self.mse_criterion(prediction, prediction_gt)    
         
-        compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=True)
+        compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=False)
 
         return loss
 
