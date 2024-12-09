@@ -25,7 +25,7 @@ class WindflowCNN(LightningModule):
         self.log("train_loss", loss, on_step=True, on_epoch=False, prog_bar=True)
         self.log("train_mse", acc, on_step=True, on_epoch=False, prog_bar=True)
         return loss
-    
+
     def validation_step(self, batch):
         prediction_gt, wind_vector, lidar_scan = batch
         input_data = torch.cat([wind_vector, lidar_scan], dim=1)
@@ -35,7 +35,7 @@ class WindflowCNN(LightningModule):
         self.log("train_loss", loss, on_step=True, on_epoch=False, prog_bar=True)
         self.log("train_mse", acc, on_step=True, on_epoch=False, prog_bar=True)
         return loss
-    
+
     def configure_optimizers(self):
         lr = self.hparams["learning_rate"]
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)

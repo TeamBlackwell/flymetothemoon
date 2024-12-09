@@ -3,7 +3,11 @@ from model.decoder import MLPDecoder
 import torch
 from torch import nn
 from torchmetrics import MeanSquaredError
-from utils.metrics import compute_and_save_my_metrics, compute_velocity_error, compute_direction_error
+from utils.metrics import (
+    compute_and_save_my_metrics,
+    compute_velocity_error,
+    compute_direction_error,
+)
 
 
 class WindFlowDecoder(LightningModule):
@@ -25,11 +29,11 @@ class WindFlowDecoder(LightningModule):
         prediction_gt, wind_vector, lidar_scan = batch
         input_data = torch.cat([wind_vector, lidar_scan], dim=1)
         prediction = self.decoder(input_data)
-        
+
         loss = self.mse_criterion(prediction, prediction_gt)
 
         compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=False)
-        
+
         return loss
 
     def validation_step(self, batch, batch_idx):
