@@ -19,6 +19,7 @@ def compute_direction_error(prediction, target, average=True):
     else:
         return torch.abs(prediction_dir - target_dir)
 
+
 def compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=False):
 
     velocity_diff = compute_velocity_error(prediction, prediction_gt)

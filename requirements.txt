@@ -3,3 +3,4 @@ lightning
 tensorboard
 pandas
 jsonargparse[signatures]>=4.27.7
+torch_geometric
