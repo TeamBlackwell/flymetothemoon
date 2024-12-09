@@ -6,7 +6,7 @@ from torchmetrics import MeanSquaredError
 from utils.metrics import compute_velocity_error, compute_direction_error
 
 
-class WindFlowDecoder(LightningModule):
+class WindFlowDecoderButWithSep(LightningModule):
 
     def __init__(
         self,
