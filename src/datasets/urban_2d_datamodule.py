@@ -37,7 +37,7 @@ class UrbanWinds2DDataModule(L.LightningDataModule):
         return DataLoader(
             self.urbanflows_val,
             batch_size=6,
-            shuffle=True,
+            shuffle=False,
             num_workers=0,
         )
 
@@ -73,7 +73,7 @@ class UrbanWinds2DGraphModule(L.LightningDataModule):
         return DataLoader(
             self.urbanflows_val,
             batch_size=1,
-            shuffle=True,
+            shuffle=False,
             num_workers=0,
         )
 

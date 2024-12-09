@@ -82,7 +82,7 @@ class LidarGraphConverter:
 
 
 class G2GCore(torch.nn.Module):
-    def __init__(self, node_feature_dim=2, hidden_dim=64, pred_size=11):
+    def __init__(self, node_feature_dim=2, hidden_dim=64, pred_size=10):
         super(G2GCore, self).__init__()
         # Define GCN layers
         self.pred_size = pred_size
@@ -110,8 +110,8 @@ class G2GCore(torch.nn.Module):
         torch.Tensor: A matrix of shape [output_dim, output_dim].
         """
         # Ensure x and edge_index are on the same device
-        print(x.shape)
-        print(edge_index.shape)
+        # print(x.shape)
+        # print(edge_index.shape)
         
         # Pass through GCN layers with nonlinearities
         x = F.relu(self.conv1(x, edge_index))
