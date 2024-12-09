@@ -42,6 +42,43 @@ class UrbanWinds2DDataModule(L.LightningDataModule):
         )
 
 
+class UrbanWinds2DGraphModule(L.LightningDataModule):
+    def __init__(
+        self, data_dir: Path, batch_size: int = 4, prediction_window_size: int = 10
+    ):
+        super().__init__()
+        self.data_dir = data_dir
+        self.batch_size = batch_size
+        self.prediction_window_size = prediction_window_size
+
+    def setup(self, stage):
+
+        self.urbanflows_train = UrbanWindFlows2D(
+            self.data_dir / "train", prediction_window_size=self.prediction_window_size
+        )
+
+        self.urbanflows_val = UrbanWindFlows2D(
+            self.data_dir / "val", prediction_window_size=self.prediction_window_size
+        )
+
+    def train_dataloader(self):
+        return DataLoader(
+            self.urbanflows_train,
+            batch_size=1,
+            shuffle=True,
+            num_workers=0,
+        )
+
+    def val_dataloader(self):
+        return DataLoader(
+            self.urbanflows_val,
+            batch_size=1,
+            shuffle=True,
+            num_workers=0,
+        )
+
+
+
 class UrbanWindFlows2D(Dataset):
     def __init__(self, path, prediction_window_size: int):
         self.windflow_dir = path / "windflow"
