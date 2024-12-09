@@ -24,7 +24,7 @@ class GraphNN(LightningModule):
         compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=False)
         
         return loss
-    
+
     def validation_step(self, batch):
         prediction_gt, wind_vector, lidar_scan = batch
         input_data = torch.cat([wind_vector, lidar_scan], dim=1)
@@ -33,7 +33,7 @@ class GraphNN(LightningModule):
         compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=True)
         
         return loss
-    
+
     def configure_optimizers(self):
         lr = self.hparams["learning_rate"]
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)

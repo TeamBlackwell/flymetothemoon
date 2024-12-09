@@ -78,6 +78,7 @@ class ConvEncoder(torch.nn.Module):
 
         return x
 
+
 class MLPDecoder(torch.nn.Module):
     def __init__(self, pred_size):
         super(MLPDecoder, self).__init__()
@@ -95,7 +96,7 @@ class MLPDecoder(torch.nn.Module):
         x = torch.relu(self.hidden_layer_1(x))
         x = torch.relu(self.hidden_layer_2(x))
         x = self.hidden_layer_3(x)
-        
+
         return x.view(x.size(0), self.pred_size, self.pred_size, 2)
 
 
@@ -107,5 +108,5 @@ class ConvModel(torch.nn.Module):
 
     def forward(self, x):
         x = self.encoder(x)
-        y= self.decoder(x)
+        y = self.decoder(x)
         return y
