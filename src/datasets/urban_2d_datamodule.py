@@ -83,7 +83,8 @@ class UrbanWinds2DDataModule(L.LightningDataModule):
             self.urbanflows_train,
             batch_size=60,
             shuffle=True,
-            num_workers=0,
+            num_workers=4,
+            persistent_workers=True
         )
 
     def val_dataloader(self):
@@ -91,7 +92,8 @@ class UrbanWinds2DDataModule(L.LightningDataModule):
             self.urbanflows_val,
             batch_size=6,
             shuffle=False,
-            num_workers=0,
+            num_workers=4,
+            persistent_workers=True
         )
 
 
