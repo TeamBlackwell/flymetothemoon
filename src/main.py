@@ -4,6 +4,7 @@ from datasets.urban_2d_datamodule import UrbanWinds2DDataModule, UrbanWinds2DGra
 from model.module import WindFlowDecoder
 from model_in_sep.module import WindFlowDecoderButWithSep
 from cnn.module import WindflowCNN
+from graph2graph.module import GraphNN
 
 torch.set_float32_matmul_precision("medium")
 
