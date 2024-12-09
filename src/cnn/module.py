@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 class WindflowCNN(LightningModule):
-    def __init__(self, learning_rate=1e-3):
+    def __init__(self, learning_rate=1e-4):
         super().__init__()
         self.save_hyperparameters()
 
