@@ -119,7 +119,7 @@ class G2GCore(torch.nn.Module):
         # Ensure x and edge_index are on the same device
         # print(x.shape)
         # print(edge_index.shape)
-        
+
         # Pass through GCN layers with nonlinearities
         x = F.relu(self.conv1(x, edge_index))
         x = F.relu(self.conv2(x, edge_index))

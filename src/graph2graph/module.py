@@ -22,7 +22,7 @@ class GraphNN(LightningModule):
         loss = self.mse_criterion(prediction, prediction_gt)
 
         compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=False)
-        
+
         return loss
 
     def validation_step(self, batch):
@@ -31,7 +31,7 @@ class GraphNN(LightningModule):
         prediction = self.model(input_data)
         loss = self.mse_criterion(prediction, prediction_gt)
         compute_and_save_my_metrics(self, loss, prediction, prediction_gt, val=True)
-        
+
         return loss
 
     def configure_optimizers(self):

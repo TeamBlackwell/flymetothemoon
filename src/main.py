@@ -1,6 +1,10 @@
 import torch
 from lightning.pytorch.cli import LightningCLI
-from datasets.urban_2d_datamodule import UrbanWinds2DDataModule, UrbanWinds2DGraphModule, UrbanWinds2DLidarDataModule
+from datasets.urban_2d_datamodule import (
+    UrbanWinds2DDataModule,
+    UrbanWinds2DGraphModule,
+    UrbanWinds2DLidarDataModule,
+)
 
 from model.module import WindFlowDecoder, WindFlowDecoderAdvanced, BinarizedCNN2D
 from model_in_sep.module import WindFlowDecoderButWithSep

@@ -97,6 +97,7 @@ class BinarizedCNN2D(LightningModule):
         optimizer = torch.optim.Adam(self.model.parameters(), lr=lr)
         return optimizer
 
+
 class WindFlowDecoderAdvanced(LightningModule):
 
     def __init__(
@@ -115,10 +116,10 @@ class WindFlowDecoderAdvanced(LightningModule):
     def training_step(self, batch, batch_idx):
         prediction_gt, wind_vector, lidar_scan = batch
         input_data = torch.cat([wind_vector, lidar_scan], dim=1)
-        
+
         # standard scaler the input data
         input_data = (input_data - input_data.mean()) / input_data.std()
-        
+
         # print(input_data)
 
         prediction = self.decoder(input_data)
@@ -138,7 +139,7 @@ class WindFlowDecoderAdvanced(LightningModule):
         prediction_gt, wind_vector, lidar_scan = batch
         input_data = torch.cat([wind_vector, lidar_scan], dim=1)
         input_data = (input_data - input_data.mean()) / input_data.std()
-        
+
         prediction = self.decoder(input_data)
 
         prediction = prediction.view(-1)
