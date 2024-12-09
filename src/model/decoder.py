@@ -12,9 +12,9 @@ class MLPDecoder(nn.Module):
             *[
                 nn.Linear(hidden_size, hidden_size * 2),
                 nn.ReLU(),
-                nn.Linear(hidden_size, hidden_size * 3),
+                nn.Linear(hidden_size * 2, hidden_size * 3),
                 nn.ReLU(),
-                nn.Linear(hidden_size, hidden_size * 4),
+                nn.Linear(hidden_size * 3, hidden_size * 4),
                 nn.ReLU(),
             ]
         )

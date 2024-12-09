@@ -14,8 +14,8 @@ class MLPDecoder(nn.Module):
         # now merge output of sep_layer and fc1
 
         self.fc2 = nn.Linear(hidden_size + 64, hidden_size * 2)
-        self.fc3 = nn.Linear(hidden_size, hidden_size * 3)
-        self.fc4 = nn.Linear(hidden_size, hidden_size * 4)
+        self.fc3 = nn.Linear(hidden_size * 2, hidden_size * 3)
+        self.fc4 = nn.Linear(hidden_size * 3, hidden_size * 4)
         self.fc5 = nn.Linear(hidden_size * 4, (self.pred_size**2) * 2)
 
     def forward(self, x):
