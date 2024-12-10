@@ -157,7 +157,7 @@ class UrbanWinds2DGraphModule(L.LightningDataModule):
     def train_dataloader(self):
         return DataLoader(
             self.urbanflows_train,
-            batch_size=60,
+            batch_size=1,
             shuffle=True,
             num_workers=0,
         )
@@ -165,7 +165,7 @@ class UrbanWinds2DGraphModule(L.LightningDataModule):
     def val_dataloader(self):
         return DataLoader(
             self.urbanflows_val,
-            batch_size=6,
+            batch_size=1,
             shuffle=False,
             num_workers=0,
         )
