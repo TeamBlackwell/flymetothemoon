@@ -7,6 +7,8 @@ The model does not use the entire map knowledge but rather LiDAR data to underst
 
 The lightweight nature of the model allows it to efficiently run on mobile and power constrained environments such as a drone.
 
+The project is inspired by [Learning Local Urban Wind Flow Fields From Range Sensing](https://ieeexplore.ieee.org/document/10592305]).
+
 ## Usage
 
 Install the required packages using the following command.
